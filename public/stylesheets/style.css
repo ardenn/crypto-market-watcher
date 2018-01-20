@@ -1,3 +1,14 @@
 body {
-
+    padding: 50px 0px 50px 0px;
+    font-family: 'Bree Serif', serif;
+}
+.card {
+    padding: 20px;
+    border-radius: 10px;
+    background: #F2F4F5; 
+}
+header {
+    color: #0065FF;
+    padding: 50px;
+    text-align: center;
 }

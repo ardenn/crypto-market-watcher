@@ -10,6 +10,10 @@ import index from './routes/index';
 
 const app = express();
 const debug = Debug('crypto-martket-watcher:app');
+const passport = require('passport');
+
+app.use(passport.initialize())
+app.use(passport.session())
 app.set('views', path.join(__dirname, 'views'));
 // view engine setup
 app.set('view engine', 'ejs');

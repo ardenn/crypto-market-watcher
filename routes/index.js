@@ -5,29 +5,31 @@ const router = express.Router();
 
 /* GET index page. */
 router.get('/', (req,res)=>{
-    request('https://api.livecoin.net/exchange/ticker?currencyPair=BTC/USD',
-        function(error,response,body){
-            if (!error && response.statusCode == 200){
-                var livecoin = JSON.parse(body)
-            }
-            request('https://api.coinmarketcap.com/v1/ticker/bitcoin/',
-                function(error,response,body){
-                    if (!error && response.statusCode == 200){
-                        var coinmarket = JSON.parse(body)
-                    }
-                    request('https://api.cryptowat.ch/markets/gdax/btcusd/summary',
-                        function(error,response,body){
-                            if (!error | response.statusCode==400){
-                                var cryptowat = JSON.parse(body)
-                            }
-                            res.render('index', {
-                                title: 'Rodgers',
-                                live: livecoin["last"],
-                                coin: coinmarket[0]["price_usd"],
-                                crypt: cryptowat["result"]["price"]["last"]
-                            });
-                    })
-            })
-    })
-})
+    res.render('index', {
+        title: 'Mc\'Alila - The CryptWatcher'
+    });
+});
+
+/* GET prices page. */
+router.get('/prices', (req,res)=>{
+    res.render('prices', {
+        title: 'Mc\'Alila - The CryptWatcher'
+    });
+});
+
+/* GET login page. */
+router.get('/login', (req,res)=>{
+    res.render('login', {
+        title: 'Mc\'Alila - The CryptWatcher',
+        message: []
+    });
+});
+
+/* GET signup page. */
+router.get('/signup', (req,res)=>{
+    res.render('signup', {
+        title: 'Mc\'Alila - The CryptWatcher',
+        message: []
+    });
+});
 export default router;

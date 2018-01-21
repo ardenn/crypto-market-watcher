@@ -10,7 +10,7 @@ function fetchDetails(url,name){
     .then((data)=>{
         let item = document.getElementById(name)
         item.style.color = "red"
-        item.textContent = parseJson(name,data)
+        item.textContent = "$ "+parseJson(name,data)
     })
     .catch((errors)=>{
         console.log(errors)
@@ -31,4 +31,4 @@ setInterval(function(){
     sites.forEach(function(site){
     fetchDetails(site.url,site.name)
     })
-},10000)
+},5000)

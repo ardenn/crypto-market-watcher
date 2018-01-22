@@ -25,7 +25,8 @@ router.get('/', (req, res) => {
 router.get('/prices', (req, res) => {
   if (req.session.user){
     res.render('prices',{
-      title: "Mc'Alila - The CryptWatcher"
+      title: "Mc'Alila - The CryptWatcher",
+      name: req.session.user
     })
   }else{
     res.redirect('/login')
@@ -39,12 +40,13 @@ router.get('/login',sessionChecker, (req, res) => {
     })
   })
 router.post('/login',(req, res) => {
-    let username, password = [req.body.username, req.body.password]
-    db.query('SELECT username,password FROM users where username = $1', [username], (err, response) => {
+    let [username, password] = [req.body.username, req.body.password]
+    db.query('SELECT username,password FROM users where username=$1', [username], (err, response) => {
       if (err) {
         console.log("Username does not exist", err)
         res.redirect('/login')
       }else{
+        console.log(response.rows[0].password)
       bcrypt.compare(password, response.rows[0].password).then(function (resp) {
         if (resp) {
           req.session.user = username;
@@ -68,10 +70,23 @@ router.get('/signup',sessionChecker, (req, res) => {
         if (err) {
           res.redirect('/signup');
         }else{
-        req.session.user = username;
-        res.redirect('/prices');
+          req.session.user = username;
+          res.redirect('/prices');
         }
       })
     })
   });
+
+  // GET websocket
+  router.get('/webs', (req,res)=>{
+    res.render('price',{
+      title: "Mc'Alila - The CryptWatcher"
+    })
+  })
+
+// GET logout
+router.get('/logout', function (req, res) {
+  req.session.destroy();
+  res.redirect('login');
+});
 export default router;

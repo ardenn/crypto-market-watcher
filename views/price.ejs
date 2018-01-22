@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+  </head>
+  <body>
+    <header class="container">
+        <h1>Mc'Alila - The CryptWatcher</h1>
+    </header>
+
+    <section class="container justify-content-center">
+        <div class="row">
+           <div class="card-group col-sm-12">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">BTCC</h5>
+                  <p class="card-text" id="coinApi">Waiting for price...</p>
+                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">OKCoin</h5>
+                  <p class="card-text" id="okCoin">Waiting for price...</p>
+                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">BitFinnex</h5>
+                  <p class="card-text usd-value" id="bitFinnex">Waiting for price...</p>
+                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+            </div> 
+        </div>
+    </section>
+    <!-- <script type="text/javascript" src="/js/priceFetcher.js"></script> -->
+    <script type="text/javascript" src="/js/webFetcher.js"></script>
+  </body>
+</html>

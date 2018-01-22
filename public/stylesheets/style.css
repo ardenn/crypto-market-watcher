@@ -1,5 +1,5 @@
 body {
-    padding: 50px 0px 50px 0px;
+    padding: 0px 0px 50px 0px;
     font-family: 'Bree Serif', serif;
 }
 .card {
@@ -11,4 +11,13 @@ header {
     color: #0065FF;
     padding: 50px;
     text-align: center;
+}
+.form-section {
+    padding-top: 150px;
+}
+.welcome {
+    margin-top: 150px;
+    padding: 50px;
+    background: #F2F4F5;
+    border-radius: 5px;
 }

@@ -21,3 +21,11 @@ header {
     background: #F2F4F5;
     border-radius: 5px;
 }
+.fa-caret-up {
+    color: green;
+    font-size: 1.25rem;
+}
+.fa-caret-down {
+    color: red;
+    font-size: 1.25rem;
+}

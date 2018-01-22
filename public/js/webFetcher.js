@@ -1,14 +1,20 @@
-function getCrypto(name, url){
+function getCrypto(name, url) {
     const site = new WebSocket(url)
+    let oldContent = 0
 
     site.onmessage = (msg) => {
         let item = document.getElementById(name)
-        item.style.color = "red"
         let newContent = parseData(name, JSON.parse(msg.data))
-        if (newContent){
-            item.textContent = "$ " + parseFloat(newContent).toFixed(4)
+        if (oldContent <= newContent) {
+            item.previousElementSibling.children[0].className = "fa fa-caret-up"
+        } else {
+            item.previousElementSibling.children[0].className = "fa fa-caret-down"
         }
-        
+        if (newContent) {
+            item.textContent = " $ " + parseFloat(newContent).toFixed(4)
+        }
+        oldContent = newContent
+
     }
 
     let msg
@@ -22,9 +28,9 @@ function getCrypto(name, url){
             })
             break;
         case "okCoin":
-            msg = JSON.stringify({ 
-                'event': 'addChannel', 
-                'channel': 'ok_sub_spot_btc_usd_ticker' 
+            msg = JSON.stringify({
+                'event': 'addChannel',
+                'channel': 'ok_sub_spot_btc_usd_ticker'
             })
             break
         case "coinApi":
@@ -35,13 +41,19 @@ function getCrypto(name, url){
                 Symbol: "BTCUSD"
             })
             break
+        case "cryptoCompare":
+            msg = JSON.stringify({
+                "op": "subscribe",
+                "args": ["tradeBin1m:XBTUSD"]
+            })
+            break
         default:
             break;
     }
     site.onopen = () => site.send(msg)
 }
 
-function parseData(name,data){
+function parseData(name, data) {
     switch (name) {
         case "bitFinnex":
             return data[1][6]
@@ -49,11 +61,14 @@ function parseData(name,data){
             return data[0]["data"]["last"]
         case "coinApi":
             return data.Last
+        case "cryptoCompare":
+            return data.data[0].vwap
         default:
             console.log("Sorry, name not found")
     }
 }
 
-getCrypto("bitFinnex",'wss://api.bitfinex.com/ws/2')
+getCrypto("bitFinnex", 'wss://api.bitfinex.com/ws/2')
 getCrypto("okCoin", 'wss://real.okcoin.com:10440/websocket')
-getCrypto("coinApi",'wss://spotusd-wsp.btcc.com/')
+getCrypto("coinApi", 'wss://spotusd-wsp.btcc.com/')
+getCrypto("cryptoCompare", "wss://www.bitmex.com/realtime")

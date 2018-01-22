@@ -7,8 +7,10 @@ function getCrypto(name, url) {
         let newContent = parseData(name, JSON.parse(msg.data))
         if (oldContent <= newContent) {
             item.previousElementSibling.children[0].className = "fa fa-caret-up"
+            item.style.color = "green"
         } else {
             item.previousElementSibling.children[0].className = "fa fa-caret-down"
+            item.style.color = "red"
         }
         if (newContent) {
             item.textContent = " $ " + parseFloat(newContent).toFixed(4)

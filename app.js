@@ -28,8 +28,7 @@ app.use(
   session({
     secret: ";mdsmfk853495040efd cr5q3ek",
     resave: true,
-    saveUninitialized: true,
-    cookie: { maxAge: 18000000 }
+    saveUninitialized: true
   })
 );
 
